@@ -14,7 +14,7 @@ class CustomElevatedButton extends StatelessWidget {
   });
 
   final Color? bgColor, borderColor;
-  final VoidCallback onPressed;
+  final Function()? onPressed;
   final double? buttonHeight, buttonWidth, borderRadius;
   final Widget child;
   final EdgeInsetsGeometry padding;

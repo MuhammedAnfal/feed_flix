@@ -51,6 +51,11 @@ dependencies:
   google_fonts: ^6.3.2
   dotted_decoration: ^2.0.0
   shared_preferences: ^2.5.3
+  connectivity_plus: ^7.0.0
+  video_player: ^2.8.2
+  image_picker: ^1.0.4
+  get_it: ^8.2.0
+
 
 
 

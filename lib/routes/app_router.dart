@@ -1,6 +1,6 @@
-import 'package:feed_flix/data/auth/screens/login_screen.dart';
-import 'package:feed_flix/data/home/screens/add_feed_screen.dart';
-import 'package:feed_flix/data/home/screens/home_screen.dart';
+import 'package:feed_flix/features/auth/presentation/pages/login_screen.dart';
+import 'package:feed_flix/features/feed/presentation/pages/add_feed_screen.dart';
+import 'package:feed_flix/features/home/presentation/pages/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter appRouter = GoRouter(

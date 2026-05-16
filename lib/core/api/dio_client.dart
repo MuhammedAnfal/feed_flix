@@ -7,8 +7,8 @@ class DioClient {
     dio = Dio(
       BaseOptions(
         baseUrl: baseApi,
-        connectTimeout: Duration(milliseconds: 10000),
-        sendTimeout: Duration(milliseconds: 10000),
+        connectTimeout: Duration(milliseconds: 30000),
+        sendTimeout: Duration(milliseconds: 30000),
       ),
     );
   }

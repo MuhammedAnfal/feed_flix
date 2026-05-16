@@ -1,1 +1,1 @@
-String baseApi = 'https://frijo.noviindus.in/api/';
+const String baseApi = 'https://frijo.noviindus.in/api/';
