@@ -1,4 +1,3 @@
-import 'package:feed_flix/core/network/api_services.dart';
 import 'package:feed_flix/core/storage_services/storage_service.dart';
 import 'package:feed_flix/features/auth/presentation/providers/auth_providers.dart';
 import 'package:feed_flix/features/feed/presentation/providers/feed_provider.dart';
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    print(token);
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => di.sl<AuthProvider>()),

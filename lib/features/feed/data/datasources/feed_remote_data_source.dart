@@ -30,7 +30,6 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
       return response.map((item) => FeedModel.fromJson(item)).toList();
     }
 
-    throw ServerException('Invalid response format');
   }
 
   @override
@@ -42,17 +41,16 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
     void Function(int sent, int total)? onSendProgress,
   }) async {
     try {
-      // Create FormData
       final formData = {
         'video': await MultipartFile.fromFile(videoFile.path, filename: 'video.mp4'),
         'image': await MultipartFile.fromFile(imageFile.path, filename: 'thumbnail.jpg'),
       };
 
-      // Prepare fields
       final fields = {
-        'description': description,
+        'desc': description,
         'categories': categories.map((id) => id.toString()).toList(),
       };
+
 
       final response = await apiClient.uploadFeed<Map<String, dynamic>>(
         endpoint: ApiEndpoints.myFeed,

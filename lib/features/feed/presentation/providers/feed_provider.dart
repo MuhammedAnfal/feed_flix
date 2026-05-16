@@ -11,7 +11,6 @@ class MyFeedProvider with ChangeNotifier {
 
   MyFeedProvider({required this.getMyFeedsUseCase, required this.uploadFeedUseCase});
 
-  // State variables - Change FeedEntity to FeedModel
   List<FeedModel> _myFeeds = [];
   bool _isLoading = false;
   bool _isUploading = false;
@@ -22,7 +21,7 @@ class MyFeedProvider with ChangeNotifier {
   String _description = '';
   List<int> _selectedCategories = [];
 
-  // Getters
+
   List<FeedModel> get myFeeds => _myFeeds;
   bool get isLoading => _isLoading;
   bool get isUploading => _isUploading;
@@ -40,7 +39,6 @@ class MyFeedProvider with ChangeNotifier {
         _selectedCategories.isNotEmpty;
   }
 
-  // Setters
   void setVideo(XFile? video) {
     _selectedVideo = video;
     notifyListeners();
@@ -53,6 +51,8 @@ class MyFeedProvider with ChangeNotifier {
 
   void setDescription(String description) {
     _description = description;
+    print(_description);
+    print('object');
     notifyListeners();
   }
 
@@ -95,7 +95,6 @@ class MyFeedProvider with ChangeNotifier {
       _uploadProgress = 1.0;
       notifyListeners();
 
-      // Reset form after successful upload
       resetForm();
       return true;
     } catch (e) {
@@ -165,7 +164,6 @@ class MyFeedProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // Reset only upload state
   void resetUploadState() {
     _isUploading = false;
     _uploadProgress = 0.0;
@@ -173,14 +171,13 @@ class MyFeedProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // Get my feeds - Fixed type issue
   Future<void> getMyFeeds() async {
     _isLoading = true;
     _errorMessage = '';
     notifyListeners();
 
     try {
-      _myFeeds = await getMyFeedsUseCase(); // Now this returns List<FeedModel>
+      _myFeeds = await getMyFeedsUseCase();
       _isLoading = false;
       notifyListeners();
     } on ApiException catch (e) {
@@ -194,7 +191,7 @@ class MyFeedProvider with ChangeNotifier {
     }
   }
 
-  // Upload feed method with progress
+
   Future<bool> uploadFeed({
     required XFile videoFile,
     required XFile imageFile,
@@ -223,12 +220,12 @@ class MyFeedProvider with ChangeNotifier {
       _isUploading = false;
       _uploadProgress = 1.0;
 
-      // Show 100% briefly before resetting
+
       await Future.delayed(const Duration(milliseconds: 500));
 
       _uploadProgress = 0.0;
-      await getMyFeeds(); // Refresh the list
-      clearForm(); // Clear the form after successful upload
+      await getMyFeeds();
+      clearForm();
       notifyListeners();
       return true;
     } on ApiException catch (e) {
@@ -246,12 +243,10 @@ class MyFeedProvider with ChangeNotifier {
     }
   }
 
-  // Refresh feeds
   Future<void> refreshFeeds() async {
     await getMyFeeds();
   }
 
-  // Clear error message
   void clearError() {
     if (_errorMessage.isNotEmpty) {
       _errorMessage = '';

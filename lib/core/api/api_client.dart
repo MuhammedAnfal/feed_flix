@@ -155,14 +155,10 @@ class ApiClient {
     void Function(int sent, int total)? onSendProgress,
   }) async {
     try {
-      print('=== UPLOAD DEBUG START ===');
-      print('Token: $token');
-      print('Endpoint: $endpoint');
-      print('Fields: $fields');
-      print('FormData keys: ${formData.keys.toList()}');
 
       final finalOptions = Options(
-        headers: {'Content-Type': 'multipart/form-data', 'Accept': 'application/json'},
+        headers: { 'Accept': 'application/json'},
+        contentType: 'multipart/form-data'
       );
 
       // Add authorization header - THIS WAS THE MAIN ISSUE!

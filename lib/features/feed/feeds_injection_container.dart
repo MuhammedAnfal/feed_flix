@@ -10,17 +10,15 @@ import 'package:feed_flix/features/feed/presentation/providers/feed_provider.dar
 import 'package:feed_flix/injection_container.dart' as di;
 
 Future<void> feedsInjectionContainer() async {
-  // Data Sources
+
   di.sl.registerLazySingleton<FeedRemoteDataSource>(
     () => FeedRemoteDataSourceImpl(apiClient: ApiClient(localStorage: StorageService())),
   );
 
-  // Repository
   di.sl.registerLazySingleton<FeedRepository>(
     () => FeedRepositoryImpl(remoteDataSource: di.sl(), networkInfo: di.sl()),
   );
 
-  // Use Cases
   di.sl.registerLazySingleton(() => GetMyFeedsUseCase(di.sl()));
   di.sl.registerLazySingleton(() => UploadFeedUseCase(repository: di.sl()));
 }

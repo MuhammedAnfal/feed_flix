@@ -50,7 +50,7 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
         child: _buildFloatingButton(
           context: context,
           onPressed: () {
-            context.go('/addFeed');
+            context.push('/addFeed');
           },
         ),
       ),
@@ -144,7 +144,7 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
                                       Row(
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
-                                          if (categoryProvider.errorMessage.isNotEmpty)
+                                          if (categoryProvider.errorMessage !='')
                                             Padding(
                                               padding: const EdgeInsets.symmetric(
                                                 horizontal: 8,
@@ -160,7 +160,6 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
                                             )
                                           else
                                             ...categoryProvider.categories.map((category) {
-                                              // Fix: Convert id to int for comparison
                                               final categoryId = category['id'] is int
                                                   ? category['id'] as int
                                                   : int.tryParse(category['id'].toString()) ??
@@ -191,7 +190,7 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
                                                   onSelected: (_) {
                                                     _onCategorySelected(
                                                       categoryId,
-                                                      category['title'] ?? 'Unknown',
+                                                      category['title'] ?? 'Explore',
                                                     );
                                                   },
                                                 ),
@@ -240,7 +239,7 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
                     }
 
                     // Error State
-                    if (feedProvider.errorMessage.isNotEmpty && feedProvider.feeds.isEmpty) {
+                    if (feedProvider.errorMessage !="" && feedProvider.feeds.isEmpty) {
                       return SizedBox(
                         height: context.height * 0.6,
                         child: Center(

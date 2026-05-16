@@ -5,6 +5,7 @@ import 'package:feed_flix/core/toke_service.dart';
 import 'package:flutter/material.dart';
 
 class AuthProvider with ChangeNotifier {
+
   bool _isLoading = false;
   final ApiService apiService;
   final TokenService tokenService;
@@ -41,8 +42,7 @@ class AuthProvider with ChangeNotifier {
         ApiEndpoints.otp,
         data: {'country_code': '+91', 'phone': number},
       );
-      print('1');
-      print(response);
+
       _isLoading = false;
 
       if (response != null && response['token']['access'] != '') {

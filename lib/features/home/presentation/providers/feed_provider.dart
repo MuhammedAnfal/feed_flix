@@ -30,16 +30,20 @@ class FeedProvider with ChangeNotifier {
 
     try {
       final response = await apiService.get(ApiEndpoints.category);
-      print('API Response: $response');
 
       _isLoading = false;
+      print(response);
+      print('on response');
 
       final feedModel = FeedModel.fromJson(response);
-      print('feedModel: $feedModel');
+
+      print(feedModel);
+      print(feedModel.results);
+      print("on feed model");
 
       if (feedModel.results != null && feedModel.results!.isNotEmpty) {
         _feeds = feedModel.results!;
-        _filteredFeeds = []; // Reset filtered feeds
+        _filteredFeeds = [];
         print('Feeds loaded: ${_feeds.length}');
       } else {
         _errorMessage = 'No feeds available';
@@ -91,24 +95,19 @@ class FeedProvider with ChangeNotifier {
     }
   }
 
-  // Alternative: Local filtering if API doesn't support category filtering
   void filterFeedsByCategory(int categoryId, String categoryTitle) {
-    // Change to int
+
     _selectedCategoryId = categoryId;
     _selectedCategoryTitle = categoryTitle;
-
-    if (categoryId == -1) {
-      // Use -1 or null for "all feeds"
-      // Show all feeds
+    print(categoryTitle);
+    print("categoryTitle");
+    if (categoryTitle == "Explore") {
       _filteredFeeds = _feeds;
     } else {
-      // Filter feeds locally based on category
-      // Note: You'll need to modify your Results model to include category information
-      // For now, this is a placeholder - adjust based on your actual data structure
       _filteredFeeds = _feeds.where((feed) {
-        // Check if feed has category information that matches
-        // This depends on how categories are stored in your feed data
-        return feed.category?.id == categoryId;
+        print(feed.category);
+        print('on category');
+        return feed.category == categoryTitle;
       }).toList();
     }
 

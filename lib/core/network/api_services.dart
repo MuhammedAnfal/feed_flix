@@ -12,7 +12,6 @@ class ApiService {
 
   Future<Map<String, String>> get _headers async {
     final headers = {'Content-Type': 'application/json'};
-
     return headers;
   }
 

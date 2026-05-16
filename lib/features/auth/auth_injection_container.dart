@@ -6,10 +6,9 @@ import 'package:feed_flix/injection_container.dart' as di;
 import 'package:feed_flix/features/auth/domain/repositories/auth_repository.dart';
 
 Future<void> authInjectionContainer() async {
-  // Data Sources
+
   di.sl.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSourceImpl(di.sl()));
 
-  // Repository
   di.sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(
       remoteDataSource: di.sl(),
@@ -18,9 +17,8 @@ Future<void> authInjectionContainer() async {
     ),
   );
 
-  // Use Cases
   di.sl.registerLazySingleton(() => LoginUseCase(di.sl()));
 
-  // Providers
+
   di.sl.registerFactory(() => AuthProvider(apiService: di.sl(), tokenService: di.sl()));
 }

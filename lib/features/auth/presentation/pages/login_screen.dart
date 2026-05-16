@@ -26,14 +26,13 @@ class _LoginScreenState extends State<LoginScreen> {
     required BuildContext context,
     required AuthProvider authProvider,
   }) async {
-    // Validate form first
 
     final phoneNumber = numberController.text.trim();
 
     final success = await authProvider.login(number: phoneNumber);
 
     if (success && context.mounted) {
-      // Show success snackbar
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Login successful!'),
@@ -42,13 +41,11 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       );
 
-      // Navigate to home screen after a short delay
       await Future.delayed(Duration(milliseconds: 1500));
       if (context.mounted) {
         context.go('/home');
       }
     } else if (context.mounted && authProvider.errorMessage.isNotEmpty) {
-      // Show error snackbar
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(authProvider.errorMessage),
@@ -61,7 +58,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     numberController.dispose();
   }
